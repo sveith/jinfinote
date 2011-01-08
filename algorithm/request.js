@@ -51,12 +51,9 @@ DoRequest.prototype.copy = function() {
  *  @param {State} state The state to which the request should be applied.
  */
 DoRequest.prototype.execute = function(state) {
-	if(state.vector[this.user] == undefined)
-		state.vector[this.user] = 0;
-	
 	this.operation.apply(state.buffer);
 	
-	state.vector[this.user] += 1;
+	state.vector = state.vector.incr(this.user, 1);
 	
 	return this;
 };

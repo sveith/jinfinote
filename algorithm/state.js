@@ -394,7 +394,11 @@ State.prototype.canExecute = function(request) {
 	if(request == undefined)
 		return false;
 	
-	return request.vector.causallyBefore(this.vector);
+	if(request instanceof UndoRequest || request instanceof RedoRequest) {
+		return request.associatedRequest(this.log) != undefined;
+	} else {
+		return request.vector.causallyBefore(this.vector);
+	}
 };
 
 /** Executes a request that is executable.

@@ -1,0 +1,133 @@
+body, html {
+	margin: 0px;
+	padding: 0px;
+}
+
+body {
+	font: 85% Arial, Helvetica, sans-serif;
+}
+
+h1 {
+	margin-top: 0px;
+}
+
+h2 {
+	font-size: 150%;
+	font-weight: bold;
+	margin: 0px 0.8ex 0px 0px;
+	display: inline-block;
+}
+
+#log, .segment, tt, .script-output {
+	font: 10pt monospace;
+}
+
+.light, #footer {
+	color: #999999;
+}
+
+.segment.user-0 {
+	background-color: hsl(0.0, 100%, 80%);
+}
+
+.segment.user-1 {
+	background-color: hsl(60.0, 100%, 80%);
+}
+
+.segment.user-2 {
+	background-color: hsl(120.0, 100%, 80%);
+}
+
+.segment.user-3 {
+	background-color: hsl(180.0, 100%, 80%);
+}
+
+.segment.user-4 {
+	background-color: hsl(240.0, 100%, 80%);
+}
+
+.segment.user-5 {
+	background-color: hsl(300.0, 100%, 80%);
+}
+
+.request.user-0 {
+	background-color: hsl(0.0, 100%, 90%);
+	border-color: hsl(0.0, 100%, 30%);
+	color: hsl(0.0, 100%, 10%);
+}
+
+.request.user-1 {
+	background-color: hsl(60.0, 100%, 90%);
+	border-color: hsl(60.0, 100%, 30%);
+	color: hsl(60.0, 100%, 10%);
+}
+
+.request.user-2 {
+	background-color: hsl(120.0, 100%, 90%);
+	border-color: hsl(120.0, 100%, 30%);
+	color: hsl(120.0, 100%, 10%);
+}
+
+.request.user-3 {
+	background-color: hsl(180.0, 100%, 90%);
+	border-color: hsl(180.0, 100%, 30%);
+	color: hsl(180.0, 100%, 10%);
+}
+
+.request.user-4 {
+	background-color: hsl(240.0, 100%, 90%);
+	border-color: hsl(240.0, 100%, 30%);
+	color: hsl(240.0, 100%, 10%);
+}
+
+.request.user-5 {
+	background-color: hsl(300.0, 100%, 90%);
+	border-color: hsl(300.0, 100%, 30%);
+	color: hsl(300.0, 100%, 10%);
+}
+
+.segment {
+	border: 1px solid black;
+	padding: 1px 2px;
+	margin-left: -1px;
+	margin-top: 10px;
+}
+
+.block, .request {
+	margin: 1em 0px;
+	padding: 0px 1em;
+}
+
+.request, .result {
+	padding-top: 1em;
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
+}
+
+.result {
+	padding-bottom: 1em;
+}
+
+h1.success {
+	color: green;
+}
+
+h1.failure {
+	color: red;
+}
+
+.result.success {
+	background: #a2ff94;
+	border-color: #517f4a;
+	color: #243821;
+}
+
+.result.failure {
+	background: #ff5b42;
+	border-color: #7f2e21;
+	color: #38140f;
+}
+
+.error {
+	color: red;
+}

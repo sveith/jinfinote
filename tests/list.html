@@ -1,0 +1,153 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>jinfinote Test List</title>
+	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	<style type="text/css">
+		body {
+			font: 80% Arial, Helvetica, sans-serif;
+			line-height: 150%;
+		}
+		ol {
+			list-style-type: none;
+			padding: 0px;
+			margin: 0px;
+		}
+		li a {
+			text-decoration: none;
+			color: blue;
+			padding: 0px 4px;
+		}
+		li a:hover {
+			text-decoration: underline;
+		}
+		li a.success {
+			color: green;
+		}
+		li a.failure {
+			color: white;
+			background: red;
+		}
+	</style>
+	<script type="text/javascript">
+		function test_successful(href) {
+			test_add_class(href, "success");
+			test_run_next();
+		}
+		function test_failed(href) {
+			test_add_class(href, "failure");
+			test_run_next();
+		}
+		function test_add_class(href, className) {
+			var test_links = document.getElementsByTagName("a");
+			for(var index = 0; index < test_links.length; index++)
+			{
+				if(test_links[index].href == href)
+					test_links[index].className += " " + className;
+			}
+		}
+		
+		var test_index = -1;
+		function test_run_all(cls) {
+			test_run_cls = cls;
+			
+			var test_links = document.getElementsByTagName("a");
+			for(var index = 0; index < test_links.length; index++)
+			{
+				if(test_links[index].className.indexOf(cls) >= 0)
+					test_links[index].className = test_links[index].className
+						.replace("success", "").replace("failure", "");
+			}
+			
+			test_index = 0;
+			test_run_next();
+		}
+		
+		function test_run_next() {
+			if(test_index < 0) return;
+			
+			var test_links = document.getElementsByTagName("a");
+			var tindex = -1;
+			
+			for(var index = 0; index < test_links.length; index++)
+			{
+				var tl = test_links[index];
+				
+				if(tl.className.indexOf(test_run_cls) < 0)
+					continue;
+				
+				tindex += 1;
+				
+				if(tindex == test_index)
+				{
+					test_index += 1;
+					
+					if(tl.className.indexOf("skip") < 0)
+					{
+						parent.frames[1].location.href = tl.href;
+						return;
+					}
+				}
+			}
+		}
+	</script>
+</head>
+<body>
+	<ol>
+		<li><a href="#" onclick="test_run_all('ordered'); return false;">Run all</a> [ <a href="#" onclick="test_run_all('random'); return false;">Random</a> ]</li>
+		<li><a class="ordered test" href="test-01.html" target="test-main">Test 01</a> [ <a class="random test" href="random/test-01.html" target="test-main">Random</a> ]</li>
+		<li><a class="ordered test" href="test-02.html" target="test-main">Test 02</a> [ <a class="random test" href="random/test-02.html" target="test-main">Random</a> ]</li>
+		<li><a class="ordered test" href="test-03.html" target="test-main">Test 03</a> [ <a class="random test" href="random/test-03.html" target="test-main">Random</a> ]</li>
+		<li><a class="ordered test" href="test-04.html" target="test-main">Test 04</a> [ <a class="random test" href="random/test-04.html" target="test-main">Random</a> ]</li>
+		<li><a class="ordered test" href="test-05.html" target="test-main">Test 05</a> [ <a class="random test" href="random/test-05.html" target="test-main">Random</a> ]</li>
+		<li><a class="ordered test" href="test-06.html" target="test-main">Test 06</a> [ <a class="random test" href="random/test-06.html" target="test-main">Random</a> ]</li>
+		<li><a class="ordered test" href="test-07.html" target="test-main">Test 07</a> [ <a class="random test" href="random/test-07.html" target="test-main">Random</a> ]</li>
+		<li><a class="ordered test" href="test-08.html" target="test-main">Test 08</a> [ <a class="random test" href="random/test-08.html" target="test-main">Random</a> ]</li>
+		<li><a class="ordered test" href="test-09.html" target="test-main">Test 09</a> [ <a class="random test" href="random/test-09.html" target="test-main">Random</a> ]</li>
+		<li><a class="ordered test" href="test-10.html" target="test-main">Test 10</a> [ <a class="random test" href="random/test-10.html" target="test-main">Random</a> ]</li>
+		<li><a class="ordered test" href="test-11.html" target="test-main">Test 11</a> [ <a class="random test" href="random/test-11.html" target="test-main">Random</a> ]</li>
+		<li><a class="ordered test" href="test-12.html" target="test-main">Test 12</a> [ <a class="random test" href="random/test-12.html" target="test-main">Random</a> ]</li>
+		<li><a class="ordered test" href="test-13.html" target="test-main">Test 13</a> [ <a class="random test" href="random/test-13.html" target="test-main">Random</a> ]</li>
+		<li><a class="ordered test" href="test-14.html" target="test-main">Test 14</a> [ <a class="random test" href="random/test-14.html" target="test-main">Random</a> ]</li>
+		<li><a class="ordered test" href="test-15.html" target="test-main">Test 15</a> [ <a class="random test" href="random/test-15.html" target="test-main">Random</a> ]</li>
+		<li><a class="ordered test" href="test-16.html" target="test-main">Test 16</a> [ <a class="random test" href="random/test-16.html" target="test-main">Random</a> ]</li>
+		<li><a class="ordered test" href="test-17.html" target="test-main">Test 17</a> [ <a class="random test" href="random/test-17.html" target="test-main">Random</a> ]</li>
+		<li><a class="ordered test" href="test-18.html" target="test-main">Test 18</a> [ <a class="random test" href="random/test-18.html" target="test-main">Random</a> ]</li>
+		<li><a class="ordered test" href="test-19.html" target="test-main">Test 19</a> [ <a class="random test" href="random/test-19.html" target="test-main">Random</a> ]</li>
+		<li><a class="ordered test" href="test-20.html" target="test-main">Test 20</a> [ <a class="random test" href="random/test-20.html" target="test-main">Random</a> ]</li>
+		<li><a class="ordered test" href="test-21.html" target="test-main">Test 21</a> [ <a class="random test" href="random/test-21.html" target="test-main">Random</a> ]</li>
+		<li><a class="ordered test" href="test-22.html" target="test-main">Test 22</a> [ <a class="random test" href="random/test-22.html" target="test-main">Random</a> ]</li>
+		<li><a class="ordered test" href="test-23.html" target="test-main">Test 23</a> [ <a class="random test" href="random/test-23.html" target="test-main">Random</a> ]</li>
+		<li><a class="ordered test" href="test-24.html" target="test-main">Test 24</a> [ <a class="random test" href="random/test-24.html" target="test-main">Random</a> ]</li>
+		<li><a class="ordered test" href="test-25.html" target="test-main">Test 25</a> [ <a class="random test" href="random/test-25.html" target="test-main">Random</a> ]</li>
+		<li><a class="ordered test" href="test-26.html" target="test-main">Test 26</a> [ <a class="random test" href="random/test-26.html" target="test-main">Random</a> ]</li>
+		<li><a class="ordered test" href="test-27.html" target="test-main">Test 27</a> [ <a class="random test" href="random/test-27.html" target="test-main">Random</a> ]</li>
+		<li><a class="ordered test" href="test-28.html" target="test-main">Test 28</a> [ <a class="random test" href="random/test-28.html" target="test-main">Random</a> ]</li>
+		<li><a class="ordered test" href="test-29.html" target="test-main">Test 29</a> [ <a class="random test" href="random/test-29.html" target="test-main">Random</a> ]</li>
+		<li><a class="ordered test" href="test-30.html" target="test-main">Test 30</a> [ <a class="random test" href="random/test-30.html" target="test-main">Random</a> ]</li>
+		<li><a class="ordered test" href="test-31.html" target="test-main">Test 31</a> [ <a class="random test" href="random/test-31.html" target="test-main">Random</a> ]</li>
+		<li><a class="ordered test" href="test-32.html" target="test-main">Test 32</a> [ <a class="random test" href="random/test-32.html" target="test-main">Random</a> ]</li>
+		<li><a class="ordered test" href="test-33.html" target="test-main">Test 33</a> [ <a class="random test" href="random/test-33.html" target="test-main">Random</a> ]</li>
+		<li><a class="ordered test" href="test-34.html" target="test-main">Test 34</a> [ <a class="random test" href="random/test-34.html" target="test-main">Random</a> ]</li>
+		<li><a class="ordered test" href="test-35.html" target="test-main">Test 35</a> [ <a class="random test" href="random/test-35.html" target="test-main">Random</a> ]</li>
+		<li><a class="ordered test" href="test-36.html" target="test-main">Test 36</a> [ <a class="random test" href="random/test-36.html" target="test-main">Random</a> ]</li>
+		<li><a class="ordered test" href="test-37.html" target="test-main">Test 37</a> [ <a class="random test" href="random/test-37.html" target="test-main">Random</a> ]</li>
+		<li><a class="ordered test" href="test-38.html" target="test-main">Test 38</a> [ <a class="random test" href="random/test-38.html" target="test-main">Random</a> ]</li>
+		<li><a class="ordered test" href="test-39.html" target="test-main">Test 39</a> [ <a class="random test" href="random/test-39.html" target="test-main">Random</a> ]</li>
+		<li><a class="ordered test" href="test-40.html" target="test-main">Test 40</a> [ <a class="random test" href="random/test-40.html" target="test-main">Random</a> ]</li>
+		<li><a class="ordered test" href="test-41.html" target="test-main">Test 41</a> [ <a class="random test" href="random/test-41.html" target="test-main">Random</a> ]</li>
+		<li><a class="ordered test" href="test-42.html" target="test-main">Test 42</a> [ <a class="random test" href="random/test-42.html" target="test-main">Random</a> ]</li>
+		<li><a class="ordered test" href="test-43.html" target="test-main">Test 43</a> [ <a class="random test" href="random/test-43.html" target="test-main">Random</a> ]</li>
+		<li><a class="ordered test" href="test-44.html" target="test-main">Test 44</a> [ <a class="random test" href="random/test-44.html" target="test-main">Random</a> ]</li>
+		<li><a class="ordered test" href="test-45.html" target="test-main">Test 45</a> [ <a class="random test" href="random/test-45.html" target="test-main">Random</a> ]</li>
+		<li><a class="ordered test" href="test-46.html" target="test-main">Test 46</a> [ <a class="random test" href="random/test-46.html" target="test-main">Random</a> ]</li>
+		<li><a class="ordered test" href="test-47.html" target="test-main">Test 47</a> [ <a class="random test" href="random/test-47.html" target="test-main">Random</a> ]</li>
+		<li><a class="ordered test" href="test-48.html" target="test-main">Test 48</a> [ <a class="random test" href="random/test-48.html" target="test-main">Random</a> ]</li>
+		<li><a class="ordered test" href="test-49.html" target="test-main">Test 49</a> [ <a class="random test" href="random/test-49.html" target="test-main">Random</a> ]</li>
+		<li><a class="ordered test" href="test-50.html" target="test-main">Test 50</a> [ <a class="random test" href="random/test-50.html" target="test-main">Random</a> ]</li>
+		<li><a class="ordered test" href="test-51.html" target="test-main">Test 51</a> [ <a class="random test" href="random/test-51.html" target="test-main">Random</a> ]</li>
+		<li><a class="ordered test" href="test-52.html" target="test-main">Test 52</a> [ <a class="random test" href="random/test-52.html" target="test-main">Random</a> ]</li>
+	</ol>
+</body>
+</html>

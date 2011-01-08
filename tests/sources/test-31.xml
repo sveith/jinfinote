@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<infinote-test>
+ <user id="1" />
+ <user id="2" />
+ <user id="3" />
+ <user id="4" />
+ <user id="5" />
+
+ <initial-buffer>
+ </initial-buffer>
+
+ <request time="" user="1">
+  <insert pos="0">a</insert>
+ </request>
+
+ <request time="" user="1">
+  <insert pos="0">b</insert>
+ </request>
+
+ <request time="" user="1">
+  <undo />
+ </request>
+
+ <request time="" user="1">
+  <undo />
+ </request>
+
+ <final-buffer>
+ </final-buffer>
+</infinote-test>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<infinote-test>
+ <user id="1" />
+ <user id="2" />
+ <user id="3" />
+ <user id="4" />
+ <user id="5" />
+
+ <initial-buffer>
+ </initial-buffer>
+
+ <request time="" user="3">
+  <insert pos="0">2</insert>
+ </request>
+
+ <request time="" user="3">
+  <insert pos="1">3</insert>
+ </request>
+
+ <request time="" user="3">
+  <insert pos="2">4</insert>
+ </request>
+
+ <request time="" user="2">
+  <insert pos="0">h</insert>
+ </request>
+
+ <request time="" user="2">
+  <insert pos="1">h</insert>
+ </request>
+
+ <request time="" user="2">
+  <insert pos="2">h</insert>
+ </request>
+
+ <final-buffer>
+  <segment author="3">234</segment>
+  <segment author="2">hhh</segment>
+ </final-buffer>
+</infinote-test>

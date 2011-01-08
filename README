@@ -1,0 +1,28 @@
+jinfinote is a JavaScript implementation of the Infinote protocol, an open
+standard for software supporting collaborative real-time editing of text
+files.
+
+The goal of this project is to aid in creating a collaborative real-time editor
+for the web, similar to EtherPad. Desktop editors such as Gobby are already
+available for many platforms, and the intention is to close the missing link to
+the web browser.
+
+jinfinote is split into four JavaScript files:
+
+ * algorithm/operations.js
+     Contains the basic text operations (Insert, Delete, Split and NoOp) and
+     their transformations.
+ * algorithm/request.js
+     Defines do, undo and redo requests and methods to change them (transform,
+     fold, mirror etc.).
+ * algorithm/state.js
+     Contains the State and Vector classes, which are the central classes of
+     jinfinote.
+ * algorithm/text.js
+     Implements the Buffer class, among others, which enables string operations
+     on segmented texts. This is necessary to keep track of which user has
+     authored which part of the text.
+
+You need to include all of these source files on a page that uses jinfinote.
+Alternatively, you can use the supplied merge.cmd script to concatenate them
+into a single JavaScript file for easier handling.

@@ -1,0 +1,3 @@
+# Ignore generated test HTML files
+test-*.html
+random/test-*.html

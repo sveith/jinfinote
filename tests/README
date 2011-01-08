@@ -1,0 +1,8 @@
+To run the tests, they need to be transformed into HTML using XSL. Use an XSLT
+processor such as Saxon <http://saxon.sourceforge.net/> with
+sources/test-transform.xsl as the stylesheet. If you want to run the randomized
+tests as well, use sources/test-transform-random.xsl and put the resulting
+files in the "random" directory.
+
+On Windows, you can run generate.cmd to do this for you. Be sure to adjust the
+path to Saxon's Transform.exe before running it.

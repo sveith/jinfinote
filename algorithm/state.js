@@ -430,6 +430,14 @@ State.prototype.execute = function(request) {
 		
 		return;
 	}
+
+	if(request.vector.get(request.user) < this.vector.get(request.user)) {
+		// If the request has already been executed, skip it, but record it into the
+		// log.
+		// FIXME: this assumes the received request is already reversible
+		this.log.push(request);
+		return;
+	}
 	
 	request = request.copy();
 	
@@ -482,9 +490,10 @@ State.prototype.reachable = function(vector) {
 
 State.prototype.reachableUser = function(vector, user) {
 	var n = vector.get(user);
-	
+	var firstRequest = this.firstRequestByUser(user).vector.get(user);
+
 	while(true) {
-		if(n == 0)
+		if(n == firstRequest)
 			return true;
 		
 		var r = this.requestByUser(user, n - 1);
@@ -497,7 +506,7 @@ State.prototype.reachableUser = function(vector, user) {
 		if(r instanceof DoRequest)
 		{
 			var w = r.vector;
-			return w.causallyBefore(vector);
+			return w.incr(r.user).causallyBefore(vector);
 		} else {
 			var assocReq = r.associatedRequest(this.log);
 			n = assocReq.vector.get(user);
@@ -510,15 +519,30 @@ State.prototype.reachableUser = function(vector, user) {
  *  @param {Number} index The number of the request to be returned
  */
 State.prototype.requestByUser = function(user, getIndex) {
-	var userReqCount = 0;
 	for(var reqIndex in this.log)
 	{
-		if(this.log[reqIndex].user == user)
+		var request = this.log[reqIndex];
+
+		if(request.user == user && request.vector.get(user) == getIndex)
 		{
-			if(userReqCount == getIndex)
-				return this.log[reqIndex];
-			else
-				userReqCount += 1;
+			return request;
 		}
 	}
+}
+
+/** Retrieve the first request in the log that was issued by the given user.
+ *  @param {Number} user
+ */
+State.prototype.firstRequestByUser = function(user) {
+	var firstRequest;
+	for(var reqIndex in this.log) {
+		var request = this.log[reqIndex];
+
+		if(request.user == user && (!firstRequest || firstRequest.vector.get(user) > request.vector.get(user) ))
+		{
+			firstRequest = request;
+		}
+	}
+
+	return firstRequest;
 }

@@ -36,9 +36,9 @@ Segment.prototype.toString = function() {
 
 Segment.prototype.toHTML = function() {
 	var text = this.text
-		.replace("<", "&lt;")
-		.replace(">", "&gt;")
-		.replace("&", "&amp;")
+		.replace(/&/g, "&amp;")
+		.replace(/</g, "&lt;")
+		.replace(/>/g, "&gt;")
 	;
 	
 	return '<span class="segment user-' + this.user + '">' + text + '</span>';

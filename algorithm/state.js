@@ -490,10 +490,11 @@ State.prototype.reachable = function(vector) {
 
 State.prototype.reachableUser = function(vector, user) {
 	var n = vector.get(user);
-	var firstRequest = this.firstRequestByUser(user).vector.get(user);
+	var firstRequest = this.firstRequestByUser(user);
+	var firstRequestNumber = firstRequest ? firstRequest.vector.get(user) : 0;
 
 	while(true) {
-		if(n == firstRequest)
+		if(n == firstRequestNumber)
 			return true;
 		
 		var r = this.requestByUser(user, n - 1);

@@ -1,0 +1,53 @@
+This is an example application to demonstrate how to integrate jinfinote's
+algorithm implementation with a <textarea>-based editing control and a simple
+WebSocket based server. It does not have production quality but can be used
+to test the implementation and to get an idea how the different components of
+jinfinote work together.
+
+The transport layer is realized using WebSockets, so a recent version of a
+supporting web browser (such as Google Chrome or Safari) is required. Some
+browsers such as Firefox 4.0 and Opera might have this feature disabled for
+security reasons. See <http://caniuse.com/websockets> for further information
+on browser support.
+
+On the server side, Python 2.5 is required, along with the Twisted framework
+<http://twistedmatrix.com/> at version 9.0 or above.
+When using Python 2.5, the simplejson library is required (Python 2.6 and
+above have it built-in already).
+
+Running the server.py script will by default listen for HTTP connections on
+port 8080. Incoming requests are printed to the console for easier debugging.
+
+The libraries used by this demo are:
+* Twisted <http://twistedmatrix.com/>
+* Twisted WebSocket server <https://github.com/rlotun/txWebSocket>
+* jQuery <http://jquery.com/>
+* JSON-js <https://github.com/douglascrockford/JSON-js>
+* Google Diff, Match and Patch
+  <http://code.google.com/p/google-diff-match-patch/>
+
+There are some words of note on the design and implementation of this demo:
+
+The server side only provides a transport layer, having no explicit protocol
+support for Infinote. This keeps the code simple and better to understand but
+slows down the initial synchronization when new clients connect.
+Furthermore, this means that the server needs to cache all requests in memory
+and can not discard them, making it hog memory over time.
+
+Textarea controls are not optimal for this task because they do not allow for
+insertions or deletions at arbitrary positions, making them perform poorly
+when editing longer documents or with a high rate of editing activity. Rich
+text editing controls (such as contentEditable <div> elements) are better in
+this regard but also more complex to implement.
+
+When inserting or removing characters in a sequence of identical characters,
+the exact position cannot be determined by means of the diffing that this demo
+uses. This too is a consequence of textarea limitations and may cause the
+autorship of individual characters to be mixed up. The resulting text however
+is still correct; this issue only affects meta information (such as the
+aforementioned authorship of characters).
+
+The particular mechanisms and formats used in this demo - the use of
+WebSockets as the transport layer, how the requests are serialized and the
+choice of the textarea control - are by no means authoritative. Use whatever
+fits best into your application or framework.

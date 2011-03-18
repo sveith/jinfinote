@@ -47,6 +47,9 @@ autorship of individual characters to be mixed up. The resulting text however
 is still correct; this issue only affects meta information (such as the
 aforementioned authorship of characters).
 
+Neither the server nor the client have any security mechanisms in place to
+prevent spoofing or denial of service attacks, so use this with caution.
+
 The particular mechanisms and formats used in this demo - the use of
 WebSockets as the transport layer, how the requests are serialized and the
 choice of the textarea control - are by no means authoritative. Use whatever

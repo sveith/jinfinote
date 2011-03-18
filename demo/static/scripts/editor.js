@@ -1,6 +1,6 @@
 var dmp = new diff_match_patch();
 
-function CollaborativeEditor(ctl, url) {
+function CollaborativeEditor(ctl, url, session_id) {
 	if (!WebSocket) return false;
 	
 	if (lineSeparator_local == undefined)
@@ -16,6 +16,7 @@ function CollaborativeEditor(ctl, url) {
 	ce._localUser = 0;
 	ce._initialized = false;
 	ce._state = new State();
+	ce._session_id = session_id;
 	
 	function invokeUpdateHandler() { ce._handleUpdates(); }
 	
@@ -193,7 +194,7 @@ CollaborativeEditor.prototype._updateControl = function(executedRequest) {
 
 CollaborativeEditor.prototype._onSocketOpen = function(event) {
 	// The WebSocket has been established - request an user ID from the server.
-	this._postCommand("request_uid");
+	this._postCommand("join_session", [this._session_id,]);
 };
 
 CollaborativeEditor.prototype._onSocketConnectionLost = function() {

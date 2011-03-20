@@ -28,10 +28,12 @@
 			var server_name = "127.0.0.1:8080";
 		}
 
+		console.debug("Using WebSocket server", server_name, "and session name", session_name);
+
 		var edit = document.getElementById("edit");
 		var collabEdit = new CollaborativeEditor(edit, "ws://" + server_name + "/transport", session_name);
 
-		if (WebSocket) {
+		if (window.WebSocket) {
 			$("#websocket-notice").hide();
 		}
 	});

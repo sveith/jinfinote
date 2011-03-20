@@ -1,7 +1,17 @@
 var dmp = new diff_match_patch();
 
+if (window.console == undefined) {
+	// Stubs for browsers that don't provide the "console" object
+	console = {};
+	console.debug = console.info = console.warn = function(){};
+	console.error = function(message) { alert(message); };
+}
+
 function CollaborativeEditor(ctl, url, session_id) {
-	if (!WebSocket) return false;
+	if (window.WebSocket == undefined) {
+		console.error("WebSocket support is required.");
+		return;
+	};
 	
 	if (lineSeparator_local == undefined)
 	{
@@ -53,6 +63,7 @@ function CollaborativeEditor(ctl, url, session_id) {
 	
 	ce._prevValue = ce._ctl.value;
 	
+	console.debug("Opening WebSocket URL", url);
 	ce._socket = new WebSocket(url);
 	ce._socket.onopen = function(event) { ce._onSocketOpen(event); };
 	ce._socket.onclose = ce._socket.onerror = function(event) { ce._onSocketConnectionLost(); };
@@ -64,6 +75,7 @@ function CollaborativeEditor(ctl, url, session_id) {
 // Post a command and arguments to the server.
 
 CollaborativeEditor.prototype._postCommand = function(command, args) {
+	console.debug("<--", command, args);
 	var jsonData = JSON.stringify([[command, args], ]);
 	this._socket.send(jsonData);
 };
@@ -194,12 +206,14 @@ CollaborativeEditor.prototype._updateControl = function(executedRequest) {
 
 CollaborativeEditor.prototype._onSocketOpen = function(event) {
 	// The WebSocket has been established - request an user ID from the server.
+	console.debug("WebSocket opened, attempting to join session", this._session_id);
 	this._postCommand("join_session", [this._session_id,]);
 };
 
 CollaborativeEditor.prototype._onSocketConnectionLost = function() {
 	// We lost the connection to the server - lock the edit control to show this
 	// and prevent further edits.
+	console.warn("WebSocket connection lost, terminating");
 	this._ctl.readonly = "readonly";
 }
 
@@ -212,12 +226,16 @@ CollaborativeEditor.prototype._onSocketMessage = function(event) {
 		var command = jsonData[commandIndex][0];
 		var args = jsonData[commandIndex][1];
 		
+		console.debug("-->", command, args);
+
 		if (command == "assign_uid") {
 			// The server has assigned us an user ID.
 			this._localUser = parseInt(args[0]);
+			console.debug("Assigned user ID:", this._localUser);
 			this._synchronize();
 		} else if (command == "sync_end") {
 			// Synchronization is done. Update and unlock the edit control.
+			console.debug("Synchronization completed");
 			this._initialized = true;
 			this._updateFromBuffer();
 			this._unlockCtl();
@@ -260,6 +278,7 @@ CollaborativeEditor.prototype._unlockCtl = function() {
 
 CollaborativeEditor.prototype._synchronize = function() {
 	// Request to be synchronized, that is, obtain a copy of the request log.
+	console.debug("Synchronizing document");
 	this._postCommand("sync");
 };
 
